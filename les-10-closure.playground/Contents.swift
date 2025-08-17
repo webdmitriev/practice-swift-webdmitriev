@@ -148,7 +148,7 @@ escapingClosureTwo {
  
     2) Переписать функцию на closure:
  
-    func createClosure(_ valuel: Int, - value2: Int) -> [Int] {
+    func createClosure(_ valuel: Int, _ value2: Int) -> [Int] {
         // создать массив
         for num in valuel...value2 {
             // сложить вмассив
@@ -170,8 +170,83 @@ escapingClosureTwo {
 
 */
 
+// MARK: 01
+let tast01One = {
+    print("tast01One")
+}
+
+let tast01Two: (String, String) -> () = {
+    print("\($0) -> \($1)")
+}
+
+let tast01Three: (String, String) -> ([String]) = {
+    [$0, $1]
+}
+
+let task01Four: (Int, [String]) -> ([Int: String]) = {
+    var result: [Int: String] = [:]
+
+    for (index, value) in $1.enumerated() {
+        result[index] = value
+    }
+
+    return result
+}
 
 
+// MARK: 02
+let createClosure: (Int, Int) -> ([Int]) = { valuel, value2 in
+    var arr: [Int] = []
+    
+    for num in valuel...value2 {
+        arr.append(num)
+    }
+    
+    return arr
+}
 
 
+// MARK: 03
+let task03Arr: [Int: String] = [1: "Oleg", 4: "Andrey", 3: "Dima", 2: "Vova"]
+
+task03Arr.sorted(by: <)
+task03Arr.sorted { val1, val2 in
+    val1.key < val2.key
+}
+task03Arr.sorted(by: { $0.key < $1.key })
+
+
+// MARK: 04
+func task04EscapingClosure(closure: @escaping () -> ()) {
+    print("MARK: 04 - 1")
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        closure()
+    }
+    
+    print("MARK: 04 - 3")
+}
+task04EscapingClosure {
+    print("MARK: 04 - 2")
+}
+
+func task04NonEscaping(_ a: Int, _ b: Int, operation: (Int, Int) -> Int) -> Int {
+    return operation(a, b)
+}
+
+let task04Result = task04NonEscaping(5, 3) { $0 + $1 }
+print(task04Result) // 8 (5 + 3)
+
+
+// MARK: 05
+func task05AutoClosure(_ condition: @autoclosure () -> Bool) {
+    if condition() {
+        print("task05AutoClosure")
+    }
+}
+task05AutoClosure(5 > 3)
+
+
+// MARK: 06
+/// func и closure являются ссылочными типами
 
