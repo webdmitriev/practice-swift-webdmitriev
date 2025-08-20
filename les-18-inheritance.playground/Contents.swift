@@ -136,7 +136,7 @@ class IPhone: Phone {
         super.description() + (hasFlashlight ? " с фонариком" : " без фонарика")
     }
     
-    // FINAL - you cant to override
+//    takePhoto is final -> you cant to override
 //    override func takePhoto() -> String {
 //        "Фото сделано, но можно еще улучшить"
 //    }
