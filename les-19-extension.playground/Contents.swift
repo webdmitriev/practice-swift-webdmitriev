@@ -50,6 +50,7 @@ extension Double {
         (self * self * self)
     }
 }
+// 8
 print(floor(2.4).cube)
 
 
